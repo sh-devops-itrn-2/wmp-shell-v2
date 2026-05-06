@@ -1,8 +1,8 @@
 status(){
 if [ $? -eq 0 ]; then
-  echo "${GC}Success${NC}"
+  echo -e  "${GC}Success${NC}"
   else
-  echo "${RC}Failure${NC}"
+  echo -e "${RC}Failure${NC}"
 fi
 
 }
