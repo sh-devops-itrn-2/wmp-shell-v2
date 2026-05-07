@@ -10,7 +10,7 @@ id appuser &>/dev/null
 if [ $? -ne 0 ]; then
 useradd -r -s /bin/false appuser &>>OUTPUT
 else
-echo "${YC}User Already Exists${NC}"
+echo -e "${YC}User Already Exists${NC}"
 fi
 
 echo -e "${YC}Create Directory${NC}" &>>OUTPUT
