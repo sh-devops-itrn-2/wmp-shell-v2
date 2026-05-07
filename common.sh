@@ -34,7 +34,7 @@ start_service() {
   systemctl daemon-reload &>>$OUTPUT
   systemctl enable ${service_name} &>>$OUTPUT
   systemctl start ${service_name} &>>$OUTPUT
-  status_check
+  status
 }
 RC="\e[31m"
 YC="\e[33m"

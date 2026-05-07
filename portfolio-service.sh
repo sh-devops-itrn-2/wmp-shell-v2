@@ -9,7 +9,7 @@ user_add
 
 echo -e "${YC}Copy Service File${NC}"
 cp ${service_name}.service /etc/systemd/system/${service_name}.service &>>$OUTPUT
-status_check
+status
 
 
 app_pre_req
