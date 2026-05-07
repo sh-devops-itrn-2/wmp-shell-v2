@@ -1,4 +1,4 @@
-pp_prereq() {
+app_prereq() {
   id appuser &>/dev/null
   if [ $? -ne 0 ]; then
     useradd -r -s /bin/false appuser
