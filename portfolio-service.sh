@@ -6,7 +6,8 @@ status
 
 appuser=app_user
 echo -e "${YC}Add Application User${NC}"
-if [ id $app_user -ne 0 ]; then
+id appuser &>/dev/null
+if [ $? -ne 0 ]; then
 useradd -r -s /bin/false appuser &>>OUTPUT
 else
 echo "${YC}User Already Exists${NC}"
