@@ -4,9 +4,13 @@ echo -e "${YC}Install Java 21${NC}"
 dnf install -y java-21-openjdk-devel &>>OUTPUT
 status
 
+appuser=app_user
 echo -e "${YC}Add Application User${NC}"
+if [ id $app_user -ne 0 ]; then
 useradd -r -s /bin/false appuser &>>OUTPUT
-status
+else
+echo "${YC}User Already Exists${NC}"
+fi
 
 echo -e "${YC}Create Directory${NC}" &>>OUTPUT
 mkdir -p /app
@@ -16,7 +20,7 @@ echo -e "${YC}Download App Content${NC}"
 curl -L -o /tmp/portfolio-service.tar.gz https://raw.githubusercontent.com/raghudevopsb88/wealth-project/main/artifacts/portfolio-service.tar.gz &>>OUTPUT
 status
 
-echo -e "${YC}Copy systemd file{NC}"
+echo -e "${YC}Copy systemd file${NC}"
 cp -r portfolio-service.service /etc/systemd/system/portfolio-service.service
 status
 
