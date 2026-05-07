@@ -6,6 +6,14 @@ if [ $? -eq 0 ]; then
 fi
 
 }
+user_add(){
+id appuser &>/dev/null
+if [ $? -ne 0 ]; then
+useradd -r -s /bin/false appuser &>>OUTPUT
+else
+echo -e "${YC}User Already Exists${NC}"
+fi
+}
 
 
 

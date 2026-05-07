@@ -4,14 +4,7 @@ echo -e "${YC}Install Java 21${NC}"
 dnf install -y java-21-openjdk-devel &>>OUTPUT
 status
 
-appuser=app_user
-echo -e "${YC}Add Application User${NC}"
-id appuser &>/dev/null
-if [ $? -ne 0 ]; then
-useradd -r -s /bin/false appuser &>>OUTPUT
-else
-echo -e "${YC}User Already Exists${NC}"
-fi
+user_add
 
 echo -e "${YC}Create Directory${NC}" &>>OUTPUT
 mkdir -p /app
