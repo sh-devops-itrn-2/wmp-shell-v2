@@ -19,9 +19,14 @@ if [ $? -ne 0 ]; then
  echo -e "${GC}Initalized${NC}"
 fi
 
-echo -e "${YC}Edit the PostgreSQL configuration file${NC}"
-sed -i "/listen_addresses/ c listen_addresses = '*'" /var/lib/pgsql/16/data/postgresql.conf
+echo -e "${YC}Start PostgreSQL Service${NC}"
+systemctl enable postgresql-16 &>>$OUTPUT
+systemctl start postgresql-16 &>>$OUTPUT
+status
+
+echo -e "${YC}Update the PostgreSQL configuration file${NC}"
+sed -i "/listen_addresses/ c listen_addresses = '*'" /var/lib/pgsql/16/data/postgresql.conf &>>OUTPUT
+echo "host    all    all    0.0.0.0/0    scram-sha-256" >> /var/lib/pgsql/16/data/pg_hba.conf
+sed -i 's/local   all             all                                     peer/local   all             all                                     trust/' /var/lib/pgsql/16/data/pg_hba.conf &>>OUTPUT
 status $?
-
-
 
