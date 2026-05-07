@@ -19,6 +19,9 @@ if [ $? -ne 0 ]; then
  echo -e "${GC}Initalized${NC}"
 fi
 
+echo -e "${YC}Edit the PostgreSQL configuration file${NC}"
+sed -i "/listen_addresses/ c listen_addresses = '*'" /var/lib/pgsql/16/data/postgresql.conf
+status $?
 
 
 
