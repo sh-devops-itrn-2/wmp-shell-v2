@@ -13,8 +13,10 @@ echo -e "${YC}Initialize Database${NC}"
 /usr/pgsql-16/bin/postgresql-16-setup initdb &>>$OUTPUT
 if [ $? -ne 0 ]; then
 /usr/pgsql-16/bin/postgresql-16-setup initdb &>>$OUTPUT
-fi
+else
 status_check
+fi
+
 
 echo -e "${YC}Start PostgreSQL Service${NC}"
 systemctl enable postgresql-16 &>>$OUTPUT
