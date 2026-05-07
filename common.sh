@@ -15,6 +15,13 @@ echo -e "${YC}User Already Exists${NC}"
 fi
 }
 
+app_pre_req(){
+  mkdir -p /app
+  curl -L -o /tmp/${service_name}.tar.gz https://raw.githubusercontent.com/raghudevopsb88/wealth-project/main/artifacts/${service_name}.tar.gz
+  cd /app
+  tar xzf /tmp/${service_name}.tar.gz
+
+}
 
 
 RC="\e[31m"
