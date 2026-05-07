@@ -1,28 +1,28 @@
 source common.sh
 service_name=portfolio-service
 
-echo -e "${YC}Install Java 21${NC}"
-dnf install -y java-21-openjdk-devel &>>OUTPUT
-status
+echo -e "${YC}Install Java${NC}"
+dnf install -y java-21-openjdk-devel &>>$OUTPUT
+status_check
 
-user_add
+echo -e "${YC}Download and Extract Application${NC}"
+app_prereq
+status_check
+
+echo -e "${YC}Build Application${NC}"
+cd /app
+chmod +x gradlew &>>$OUTPUT
+./gradlew bootJar --no-daemon -x test &>>$OUTPUT
+status_check
+
+echo -e "${YC}Copy Jar File${NC}"
+cp /app/build/libs/*.jar /app/${service_name}.jar &>>$OUTPUT
+status_check
+
+set_permissions
 
 echo -e "${YC}Copy Service File${NC}"
 cp ${service_name}.service /etc/systemd/system/${service_name}.service &>>$OUTPUT
-status
-
-
-app_pre_req
-
-echo -e "${YC}Build Application${NC}"
-./gradlew bootJar --no-daemon -x test &>>OUTPUT
-status
-
-echo -e "${YC}Copy the built JAR${NC}"
-cp /app/build/libs/*.jar /app/portfolio-service.jar
-status
-
-set_ownership
+status_check
 
 start_service
-
