@@ -7,7 +7,10 @@ status
 
 user_add
 
-copy_systemd_file
+echo -e "${YC}Copy Service File${NC}"
+cp ${service_name}.service /etc/systemd/system/${service_name}.service &>>$OUTPUT
+status_check
+
 
 app_pre_req
 
@@ -21,4 +24,5 @@ status
 
 set_ownership
 
-service_start
+start_service
+

@@ -7,7 +7,7 @@ fi
 
 }
 user_add(){
-echo "${YC}Adding User${NC}"
+echo -e  "${YC}Adding User${NC}"
 id appuser &>/dev/null
 if [ $? -ne 0 ]; then
 useradd -r -s /bin/false appuser &>>OUTPUT
@@ -29,18 +29,12 @@ set_ownership(){
   chmod o-rwx /app -R
   status
 }
-copy_systemd_file(){
-  echo -e "${YC}Copy systemd file${NC}"
-  cp -r portfolio-service.service /etc/systemd/system/portfolio-service.service
-  status
-}
-service_start(){
-  echo -e "${YC}${service_name} Started${NC}"
-  systemctl daemon-reload
-  systemctl enable ${service_name} &>>OUTPUT
-  systemctl start ${service_name}
-  status
-
+start_service() {
+  echo -e "${YC}Start ${service_name} Service${NC}"
+  systemctl daemon-reload &>>$OUTPUT
+  systemctl enable ${service_name} &>>$OUTPUT
+  systemctl start ${service_name} &>>$OUTPUT
+  status_check
 }
 RC="\e[31m"
 YC="\e[33m"
