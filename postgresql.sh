@@ -30,3 +30,12 @@ echo "host    all    all    0.0.0.0/0    scram-sha-256" >> /var/lib/pgsql/16/dat
 sed -i 's/local   all             all                                     peer/local   all             all                                     trust/' /var/lib/pgsql/16/data/pg_hba.conf &>>OUTPUT
 status $?
 
+echo -e "${YC}Restart PostgreSQL Server"
+systemctl restart postgresql-16 &>>OUTPUT
+status
+
+echo -e "${YC}Run Setup SQL${NC}"
+sudo -u postgres /usr/pgsql-16/bin/psql < setup.sql &>>OUTPUT
+status
+
+
