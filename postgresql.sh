@@ -15,9 +15,10 @@ status $?
 echo -e "${YC}Initialize Database${NC}"
 /usr/pgsql-16/bin/postgresql-16-setup initdb &>>OUTPUT
 if [ $? -ne 0 ]; then
- /usr/pgsql-16/bin/postgresql-16-setup initdb
+ /usr/pgsql-16/bin/postgresql-16-setup initdb &>>OUTPUT
+ echo -e "${GC}Initalized${NC}"
 fi
-echo -e "${GC}Initalized${NC}"
+
 
 
 
