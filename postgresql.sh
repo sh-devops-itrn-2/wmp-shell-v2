@@ -11,6 +11,9 @@ status_check
 
 echo -e "${YC}Initialize Database${NC}"
 /usr/pgsql-16/bin/postgresql-16-setup initdb &>>$OUTPUT
+if [ $? -ne 0 ]; then
+/usr/pgsql-16/bin/postgresql-16-setup initdb &>>$OUTPUT
+fi
 status_check
 
 echo -e "${YC}Start PostgreSQL Service${NC}"
